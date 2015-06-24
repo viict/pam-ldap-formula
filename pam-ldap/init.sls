@@ -34,10 +34,18 @@ ldap_conf:
         - bindpw {{ salt['pillar.get']('pam:ldap:bindpw', '') }}
         {% endif %}
         - scope {{ salt['pillar.get']('pam:ldap:scope', 'sub') }}
+        {% if salt['pillar.get']('pam:ldap:pam_lookup_policy') %}
         - pam_lookup_policy {{ salt['pillar.get']('pam:ldap:pam_lookup_policy', 'yes') }}
+        {% endif %}
+        {% if salt['pillar.get']('pam:ldap:pam_groupdn') %}
         - pam_groupdn {{ salt['pillar.get']('pam:ldap:pam_groupdn') }}
+        {% endif %}
+        {% if salt['pillar.get']('pam:ldap:pam_member_attribute') %}
         - pam_member_attribute {{ salt['pillar.get']('pam:ldap:pam_member_attribute', 'member') }}
+        {% endif %}
+        {% if salt['pillar.get']('pam:ldap:pam_password') %}
         - pam_password {{ salt['pillar.get']('pam:ldap:pam_password') }}
+        {% endif %}
         {% if salt['pillar.get']('pam:ldap:ssl') %}
         - ssl {{ salt['pillar.get']('pam:ldap:ssl') }}
         {% endif %}
