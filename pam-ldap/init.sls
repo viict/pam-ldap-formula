@@ -1,11 +1,13 @@
 {% from "pam-ldap/map.jinja" import pam_ldap with context %}
 
+{% if salt['pillar.get']('pam:tls_cacertfile') %}
 tls_cacertfile:
   file.managed:
     - source: salt://pam-ldap/files/cert
     - user: root
     - group: root
     - mode: 640
+{% endif %}
 
 pam-ldap:
   pkg.installed:
