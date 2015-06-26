@@ -16,8 +16,8 @@ pam-ldap:
 {{ pam_ldap.config }}:
   file.managed:
     - source: salt://pam-ldap/files/ldap.conf
-    - user: user
-    - group: user
+    - user: {{ salt['pillar.get']('pam:ldap:user', 'root')  }}
+    - grou: {{ salt['pillar.get']('pam:ldap:group', 'root')  }}
     - mode: 644
 
 ldap_conf:
